@@ -57,6 +57,8 @@ function Section({children, title}) {
 }
 
 function App() {
+
+  //mongodb+srv://adsha615:chatapp@61724@cluster0.vqneqn9.mongodb.net/
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {

@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ChatScreen from '../screens/ChatScreen';
 import LoginScreen from '../screens/LoginScreen';
@@ -21,7 +21,7 @@ const StackNavigator = () => {
     return (
       <Tab.Navigator>
         <Tab.Screen name="Chats"
-          components={ChatScreen}
+          component={ChatScreen}
           options={{
             tabBarStyle: { backgroundColor: "#101010" },
             headerShown: false,
@@ -38,12 +38,13 @@ const StackNavigator = () => {
                   size={30}
                   color="#989898"
                 />
-              )
-          }} />
+              ),
+          }} 
+          />
 
 
         <Tab.Screen name="Profile"
-          components={ProfileScreen}
+          component={ProfileScreen}
           options={{
             tabBarStyle: { backgroundColor: "#101010" },
             headerShown: false,
@@ -60,10 +61,11 @@ const StackNavigator = () => {
                   size={30}
                   color="#989898"
                 />
-              )
-          }} />
+              ),
+          }}
+        />
       </Tab.Navigator>
-    )
+    );
   }
   const AuthStack = () => {
     return (
@@ -83,34 +85,34 @@ const StackNavigator = () => {
 
           }} />
       </Stack.Navigator>
-    )
-  }
+    );
+  };
 
-  function MainStack(){
+  function MainStack() {
     return (
       <Stack.Navigator>
-        <Stack.Screen 
-        name="Main"
-        component={BottomTabs}
-        options={{headerShown:false}}
+        <Stack.Screen
+          name="Main"
+          component={BottomTabs}
+          options={{ headerShown: false }}
         />
-        <Stack.Screen  
-        name='People'
-        component={PeopleScreen}
-        options={{headerShown:false}}
+        <Stack.Screen
+          name='People'
+          component={PeopleScreen}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
-    )
+    );
   }
 
 
   return (
     <NavigationContainer>
-      <MainStack/>
+      <MainStack />
     </NavigationContainer>
-  )
-}
+  );
+};
 
-export default StackNavigator
+export default StackNavigator;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

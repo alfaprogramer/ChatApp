@@ -10,20 +10,25 @@ const cors = require("cors");
 app.use(cors());
 
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 const jwt = require("jsonwebtoken");
 
 mongoose
-    .connect("mongodb+srv://adsha615:chatapp@61724@cluster0.vqneqn9.mongodb.net/")
+    .connect("mongodb+srv://adsha615:chatapp@cluster0.vqneqn9.mongodb.net/")
     .then(() => {
     console.log("connected to mongodb");
     })
     .catch(error => {
-        console.log("Error connecting to mongodb");
+        console.error(error);
     });
 
 
 app.listen(port, () => {
     console.log("server runnning on 8000");
 })
+
+
+
+const User = require("./models/user");
+const Message = require("./models/message");

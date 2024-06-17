@@ -108,7 +108,7 @@ const StackNavigator = () => {
 
   return (
     <NavigationContainer>
-      <MainStack />
+      <AuthStack />
     </NavigationContainer>
   );
 };

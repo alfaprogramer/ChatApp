@@ -1,4 +1,4 @@
-import { Keyboard, KeyboardAvoidingView, Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Keyboard, KeyboardAvoidingView, Pressable, StyleSheet, Text, TextInput, View ,Image} from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native';
@@ -99,12 +99,12 @@ const RegisterScreen = () => {
               width: 200, backgroundColor: "#4A55A2", padding: 15, marginTop: 50, marginLeft: "auto",
               marginRight: "auto", borderRadius: 6
             }}>
-              <Text style={{ color: "white", fontSize: 16, fontWeight: "bold", textAlign: "center" }}>Login</Text>
+              <Text style={{ color: "white", fontSize: 16, fontWeight: "bold", textAlign: "center" }}>Register</Text>
             </Pressable>
 
 
-            <Pressable onPress={() => navigation.navigate("Register")}>
-              <Text style={{ textAlign: "center", color: "gray", fontSize: 16, margin: 12 }}>Don't have an Account? Sign Up</Text>
+            <Pressable onPress={() => navigation.navigate("Login")}>
+              <Text style={{ textAlign: "center", color: "gray", fontSize: 16, margin: 12 }}>Already have a Account? Log in </Text>
             </Pressable>
           </View>
 

@@ -21,7 +21,7 @@ const LoginScreen = () => {
               <Text style={{fontSize:18, fontWeight:'600',color:"gray" }}>Email:</Text>
               <View>
                 <TextInput value={email} onChangeText={setEmail} placeholderTextColor="#BEBEBE"
-                  style={{ width: 320, marginTop: 15,
+                  style={{ width: 340, marginTop: 15,
                      borderBottomColor: "BEBEBE", 
                      borderBottomWidth: 1, 
                      padding: 10, 
@@ -35,8 +35,8 @@ const LoginScreen = () => {
 
               <Text style={{fontSize:18, fontWeight:'600',color:"gray", marginTop:25 }}>Password:</Text>
               <View>
-                <TextInput value={password} onChangeText={setPassword} placeholderTextColor="#BEBEBE"
-                  style={{ width: 320, marginTop: 15,
+                <TextInput secureTextEntry={true} value={password} onChangeText={setPassword} placeholderTextColor="#BEBEBE"
+                  style={{ width: 340, marginTop: 15,
                      borderBottomColor: "BEBEBE", 
                      borderBottomWidth: 1, 
                      padding: 10, 

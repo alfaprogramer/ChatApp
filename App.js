@@ -31,7 +31,7 @@ import { AuthProvider } from './AuthContext';
 
 
 
-function Section({children, title}) {
+function Section({ children, title }) {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
@@ -68,7 +68,7 @@ function App() {
 
   return (
     <AuthProvider>
-    <StackNavigator />
+      <StackNavigator/>
     </AuthProvider>
   );
 }

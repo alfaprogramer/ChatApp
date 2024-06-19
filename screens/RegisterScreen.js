@@ -2,13 +2,17 @@ import { Keyboard, KeyboardAvoidingView, Pressable, StyleSheet, Text, TextInput,
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
 
+
+//  https://www.m9.news/wp-content/uploads/2023/07/Nora-Fatehi-Hot.jpg
 const RegisterScreen = () => {
 
-  const { email, setEmail } = useState("");
-  const { password, setPassword } = useState("");
-  const { image, setImage } = useState('');
-  const { name, setName } = useState('');
+  const [ email, setEmail ] = useState("");
+  const [ password, setPassword ] = useState("");
+  const [ image, setImage ] = useState('');
+  const navigation = useNavigation();
+  const [ name, setName ] = useState('');
   const handleRegister = () => {
     const user = {
       name: name,
@@ -17,9 +21,10 @@ const RegisterScreen = () => {
       image: image,
     };
 
-    axios.post("http://localhost:8000/register", user).then(
-      response => {
+    axios.post("http://localhost:8000/register", user)
+    .then(response => {
         console.log(response);
+        console.error("Registration error details:", error.response?.data || error.message);
         Alert.alert("Registration succesfull", "you have been registered succesfully! ");
 
         setName("");
@@ -29,7 +34,8 @@ const RegisterScreen = () => {
 
 
       }).catch(error => {
-        Alert.alert("Registration error", "An error ocurred while Registering!");
+        
+        Alert.alert("Registration error", `An error occurred while Registering: ${error.message || error.toString()}`);
       });
   };
   return (
@@ -44,7 +50,13 @@ const RegisterScreen = () => {
             </Text>
 
             <Pressable style={{ marginTop: 20 }}>
-              <Image style={{ width: 50, height: 50, borderRadius: 25 }}></Image>
+              <Image 
+              source={{
+                uri: image
+                  ? image
+                  : 'https://cdn-icons-png.flaticon.com/128/149/149071.png',
+              }}
+              style={{ width: 50, height: 50, borderRadius: 25 }}></Image>
               <Text style={{ textAlign: "center", marginTop: 4, color: "gray", fontSize: 12 }}>Add</Text>
             </Pressable>
           </View>

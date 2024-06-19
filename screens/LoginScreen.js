@@ -8,10 +8,10 @@ import { AuthContext } from '../AuthContext';
 
 const LoginScreen = () => {
 
-  const { email, setEmail } = useState("");
-  const { password, setPassword } = useState("");
+  const [email, setEmail ] = useState("");
+  const [password, setPassword ] = useState("");
   const navigation = useNavigation();
-  const [token, setToken] = useContext(AuthContext);
+  const {token, setToken} = useContext(AuthContext);
   useEffect(() => {
     if (token) {
       navigation.replace("MainStack", { screen: "Main" });
@@ -32,7 +32,7 @@ const LoginScreen = () => {
       setToken(token);
     });
 
-    
+
   };
 
   return (
@@ -92,7 +92,11 @@ const LoginScreen = () => {
             </Pressable>
           </View>
           <View>
-            <Image style={{ marginTop: 50, justifyContent: "centre", alignItems: "center" }}
+            <Image 
+            source={{
+              uri: 'https://signal.org/assets/images/features/Media.png',
+            }}
+            style={{ marginTop: 50, justifyContent: "centre", alignItems: "center" }}
             />
 
 

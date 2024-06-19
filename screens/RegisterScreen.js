@@ -1,4 +1,4 @@
-import { Keyboard, KeyboardAvoidingView, Pressable, StyleSheet, Text, TextInput, View ,Image} from 'react-native'
+import { Keyboard, KeyboardAvoidingView, Pressable, StyleSheet, Text, TextInput, View, Image, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/native';
@@ -9,6 +9,21 @@ const RegisterScreen = () => {
   const { password, setPassword } = useState("");
   const { image, setImage } = useState('');
   const { name, setName } = useState('');
+  const handleRegister = () => {
+    const user = {
+      name: name,
+      email: email,
+      password: password,
+      image: image,
+    };
+
+    axios.post("http://localhost:8000/register", user).then(
+      response => {
+        console.log(response);
+        Alert.alert("Registration succesfull", "you have been registered succesfully! ")
+      }
+    )
+  }
   return (
 
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
@@ -95,7 +110,7 @@ const RegisterScreen = () => {
               </View>
             </View>
 
-            <Pressable style={{
+            <Pressable onPress={handleRegister} style={{
               width: 200, backgroundColor: "#4A55A2", padding: 15, marginTop: 50, marginLeft: "auto",
               marginRight: "auto", borderRadius: 6
             }}>

@@ -21,7 +21,7 @@ const AuthProvider = ({ children }) => {
         fetchUser();
 
     }, []);
-    return ( <AuthContext.Provider value={{ token, userId }}>
+    return ( <AuthContext.Provider value={{ token, userId, setToken }}>
          {children} 
          
          </AuthContext.Provider>);

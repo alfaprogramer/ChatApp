@@ -27,6 +27,7 @@ import {
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { StackActions } from '@react-navigation/native';
 import StackNavigator from './navigation/StackNavigator';
+import { AuthProvider } from './AuthContext';
 
 
 
@@ -66,7 +67,9 @@ function App() {
   };
 
   return (
+    <AuthProvider>
     <StackNavigator />
+    </AuthProvider>
   );
 }
 

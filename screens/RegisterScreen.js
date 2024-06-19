@@ -20,10 +20,18 @@ const RegisterScreen = () => {
     axios.post("http://localhost:8000/register", user).then(
       response => {
         console.log(response);
-        Alert.alert("Registration succesfull", "you have been registered succesfully! ")
-      }
-    )
-  }
+        Alert.alert("Registration succesfull", "you have been registered succesfully! ");
+
+        setName("");
+        setEmail("");
+        setPassword("");
+        setImage("");
+
+
+      }).catch(error => {
+        Alert.alert("Registration error", "An error ocurred while Registering!");
+      });
+  };
   return (
 
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>

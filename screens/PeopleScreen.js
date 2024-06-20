@@ -1,13 +1,43 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, SafeAreaView, FlatList } from 'react-native'
+import React, { useContext, useEffect, useState } from 'react'
+import { AuthContext } from '../AuthContext';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import User from '../componets/User';
 
 const PeopleScreen = () => {
+  const [users, setUsers] = useState([]);
+  const { token, userId } = useContext(AuthContext);
+
+  const fetchUsers = async () => {
+    try {
+      const response = await fetch(`http://192.168.18.3:8000/users/${userId}`);
+      const data = await response.json();
+      setUsers(data);
+
+    } catch (error) {
+      console.log(error);
+
+    }
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+  console.log("users", users)
   return (
-    <View>
-      <Text>PeopleScreen</Text>
-    </View>
-  )
-}
+    <SafeAreaView>
+      <View>
+        <Text style={{ textAlign: "center", fontSize: 15, fontWeight: "500", marginTop: 12 }}>People using Chatapp </Text>
+      </View>
+      <FlatList data={users} renderItem={({item}) => (
+
+        <User item/>
+      )} />
+
+      
+    </SafeAreaView>
+  );
+};
 
 export default PeopleScreen
 

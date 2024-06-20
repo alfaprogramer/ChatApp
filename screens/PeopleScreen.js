@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../AuthContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import User from '../componets/User';
+import { useNavigation } from '@react-navigation/native';
 
 const PeopleScreen = () => {
   const [users, setUsers] = useState([]);
@@ -23,7 +24,10 @@ const PeopleScreen = () => {
   useEffect(() => {
     fetchUsers();
   }, []);
-  console.log("users", users)
+  console.log("users", users);
+
+  
+
   return (
     <SafeAreaView>
       <View>

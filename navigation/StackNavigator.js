@@ -12,6 +12,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import ProfileScreen from '../screens/ProfileScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { AuthContext } from '../AuthContext';
+import RequestChatRoom from '../screens/RequestChatRoom';
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -102,6 +103,11 @@ const StackNavigator = () => {
           name='People'
           component={PeopleScreen}
           options={{ headerShown: false }}
+        />
+         <Stack.Screen
+          name='Request'
+          component={RequestChatRoom}
+          
         />
       </Stack.Navigator>
     );

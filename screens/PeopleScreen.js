@@ -29,12 +29,12 @@ const PeopleScreen = () => {
       <View>
         <Text style={{ textAlign: "center", fontSize: 15, fontWeight: "500", marginTop: 12 }}>People using Chatapp </Text>
       </View>
-      <FlatList data={users} renderItem={({item}) => (
+      <FlatList data={users} renderItem={({ item }) => (
 
-        <User item/>
+        <User item={item} key={item?._id} />
       )} />
 
-      
+
     </SafeAreaView>
   );
 };

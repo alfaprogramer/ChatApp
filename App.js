@@ -93,3 +93,7 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
+
+
+//  https://www.m9.news/wp-content/uploads/2023/07/Nora-Fatehi-Hot.jpg

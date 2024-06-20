@@ -5,7 +5,10 @@ import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 
 
-//  https://www.m9.news/wp-content/uploads/2023/07/Nora-Fatehi-Hot.jpg
+
+
+
+
 const RegisterScreen = () => {
 
   const [ email, setEmail ] = useState("");
@@ -21,10 +24,10 @@ const RegisterScreen = () => {
       image: image,
     };
 
-    axios.post("http://localhost:8000/register", user)
+    axios.post("http://192.168.18.3:8000/register", user)
     .then(response => {
         console.log(response);
-        console.error("Registration error details:", error.response?.data || error.message);
+        
         Alert.alert("Registration succesfull", "you have been registered succesfully! ");
 
         setName("");
@@ -34,7 +37,7 @@ const RegisterScreen = () => {
 
 
       }).catch(error => {
-        
+        console.error("Registration error details:", error.response?.data || error.message);
         Alert.alert("Registration error", `An error occurred while Registering: ${error.message || error.toString()}`);
       });
   };
@@ -43,7 +46,7 @@ const RegisterScreen = () => {
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <View style={{ padding: 10, alignItems: "center" }}>
         <KeyboardAvoidingView>
-          <View style={{ marginTop: 80, alignItems: "centre", justifyContent: "center" }}>
+          <View style={{ marginTop: 30, alignItems: "centre", justifyContent: "center" }}>
             <Text style={{ fontSize: 20, fontWeight: "500", color: "black" }}>Create Up your Profile</Text>
             <Text style={{ marginTop: 10, color: "black", textAlign: "center", marginHorizontal: 12 }} >
               Profiles are visible to your friends and connections and groups
@@ -56,15 +59,15 @@ const RegisterScreen = () => {
                   ? image
                   : 'https://cdn-icons-png.flaticon.com/128/149/149071.png',
               }}
-              style={{ width: 50, height: 50, borderRadius: 25 }}></Image>
-              <Text style={{ textAlign: "center", marginTop: 4, color: "gray", fontSize: 12 }}>Add</Text>
+              style={{ width: 50, height: 50, borderRadius: 25,marginLeft:160 }}></Image>
+              <Text style={{ textAlign: "center", marginTop: 4, color: "black", fontSize: 12 }}>Add</Text>
             </Pressable>
           </View>
 
 
           <View style={{ marginTop: 30 }}>
             <View>
-              <Text style={{ fontSize: 18, fontWeight: '600', color: "gray" }}>Name:</Text>
+              <Text style={{ fontSize: 18, fontWeight: '600', color: "black" }}>Name:</Text>
               <View>
                 <TextInput value={name} onChangeText={setName} placeholderTextColor="#BEBEBE"
                   style={{
@@ -80,7 +83,7 @@ const RegisterScreen = () => {
               </View>
 
 
-              <Text style={{ fontSize: 18, fontWeight: '600', color: "gray", marginTop: 25 }}>Email:</Text>
+              <Text style={{ fontSize: 18, fontWeight: '600', color: "black", marginTop: 25 }}>Email:</Text>
               <View>
                 <TextInput value={email} onChangeText={setEmail} placeholderTextColor="#BEBEBE"
                   style={{
@@ -96,7 +99,7 @@ const RegisterScreen = () => {
               </View>
 
 
-              <Text style={{ fontSize: 18, fontWeight: '600', color: "gray", marginTop: 25 }}>Password:</Text>
+              <Text style={{ fontSize: 18, fontWeight: '600', color: "black", marginTop: 25 }}>Password:</Text>
               <View>
                 <TextInput secureTextEntry={true} value={password} onChangeText={setPassword} placeholderTextColor="#BEBEBE"
                   style={{
@@ -114,7 +117,7 @@ const RegisterScreen = () => {
 
 
 
-              <Text style={{ fontSize: 18, fontWeight: '600', color: "gray", marginTop: 25 }}>Image:</Text>
+              <Text style={{ fontSize: 18, fontWeight: '600', color: "black", marginTop: 25 }}>Image:</Text>
               <View>
                 <TextInput value={image} onChangeText={setImage} placeholderTextColor="#BEBEBE"
                   style={{

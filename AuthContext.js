@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { jwtDecode } from "jwt-decode";
-import React, { createContext, useState, useEffect } from "react";
+import {jwtDecode} from "jwt-decode";
+import { createContext, useState, useEffect } from "react";
 
 
 
@@ -14,6 +14,7 @@ const AuthProvider = ({ children }) => {
         const fetchUser = async () => {
             const token = await AsyncStorage.getItem("authToken");
             const decodedToken = jwtDecode(token);
+            setToken(token);
             const userId = decodedToken.userId;
             setUserId(userId);
         };

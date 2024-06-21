@@ -94,6 +94,10 @@ app.get("/user/:userId", async(req,res) => {
 
 app.post("/sendrequest", async(req,res) => {
     const {senderId, receiverId, message} = req.body;
+
+    console.log(senderId);
+    console.log(receiverId);
+    console.log(message);
     const receiver = await User.findById(receiverId);
     if(!receiver){
         return res.status(404).json({message:"Receiver not found"});

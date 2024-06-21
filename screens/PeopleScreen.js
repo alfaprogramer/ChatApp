@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View, SafeAreaView, FlatList } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../AuthContext';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import User from '../componets/User';
+
+import User from '../components/User';
 import { useNavigation } from '@react-navigation/native';
 
 const PeopleScreen = () => {

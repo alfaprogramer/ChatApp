@@ -1,10 +1,11 @@
-import { StyleSheet, Text, View, KeyboardAvoidingView, ScrollView, TextInput, Pressable } from 'react-native'
+import { StyleSheet, Text, View, KeyboardAvoidingView, ScrollView, TextInput, Pressable, Alert } from 'react-native'
 import React, { useContext, useLayoutEffect, useState } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { AuthContext } from '../AuthContext';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Entypo from 'react-native-vector-icons/Entypo'
 import Feather from 'react-native-vector-icons/Feather'
+import axios from 'axios';
 
 const RequestChatRoom = () => {
     const navigation = useNavigation();
@@ -25,6 +26,27 @@ const RequestChatRoom = () => {
 
         });
     }, []);
+    console.log("userId", userId);
+    console.log("Rec", route?.params.receiverId);
+   
+    const sendMessage = async () => {
+        try{
+            const userData = {
+                senderId:userId,
+                receiverId:route?.params?.receiverId,
+                message:message
+            };
+
+    
+            const response = await axios.post("http://192.168.18.3:8000/sendrequest", userData);
+            if(response.status == 200){
+                setMessage("");
+                Alert.alert("your request has been shared", "wait for the user to accept your request ")
+            }
+        }catch(error){
+            console.log("error", error)
+        }
+    }
     return (
         <KeyboardAvoidingView style={{ flex: 1, backgroundColor: "white" }}>
 

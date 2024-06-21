@@ -9,6 +9,9 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
     const [token, setToken] = useState("");
     const [userId, setUserId] = useState('');
+    const [authUser,setAuthUser] = useState(
+        AsyncStorage.getItem('authToken') || null,
+    );
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -22,7 +25,7 @@ const AuthProvider = ({ children }) => {
         fetchUser();
 
     }, []);
-    return ( <AuthContext.Provider value={{ token, userId, setToken }}>
+    return ( <AuthContext.Provider value={{ token, userId, setToken,setUserId, authUser, setAuthUser}}>
          {children} 
          
          </AuthContext.Provider>

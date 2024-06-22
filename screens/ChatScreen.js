@@ -125,11 +125,11 @@ const ChatsScreen = () => {
         }}
       >
         <Pressable onPress={logout}>
-          <Image
-            style={{ width: 30, height: 30, borderRadius: 15 }}
-            source={{
-              uri: 'https://lh3.googleusercontent.com/ogw/AF2bZyi09EC0vkA0pKVqrtBq0Y-SLxZc0ynGmNrVKjvV66i3Yg=s64-c-mo',
-            }}
+        <MaterialIcons
+           
+            name="arrow-back"
+            size={26}
+            color="black"
           />
         </Pressable>
 

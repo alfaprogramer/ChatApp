@@ -192,61 +192,58 @@ app.get('/user/:userId', async (req, res) => {
 
 
 
-
-  const http = require('http').createServer(app);
-
+  const http = require('http').createServer(app);  
   const io = require('socket.io')(http);
-
-  //{"userId" : "socket ID"}
-
+  
   const userSocketMap = {};
-
+  
   io.on('connection', socket => {
     console.log('a user is connected', socket.id);
   
     const userId = socket.handshake.query.userId;
   
-    console.log('userid', userId);
-  
-    if (userId !== 'undefined') {
+    if (userId && userId !== 'undefined') {
       userSocketMap[userId] = socket.id;
+      console.log('user connected:', userId);
+    } else {
+      console.log('Invalid userId:', userId);
     }
   
     console.log('user socket data', userSocketMap);
   
     socket.on('disconnect', () => {
       console.log('user disconnected', socket.id);
-      delete userSocketMap[userId];
+      Object.keys(userSocketMap).forEach(key => {
+        if (userSocketMap[key] === socket.id) {
+          delete userSocketMap[key];
+        }
+      });
+      console.log('updated user socket data', userSocketMap);
     });
   
-    socket.on('sendMessage', ({senderId, receiverId, message}) => {
+    socket.on('sendMessage', ({ senderId, receiverId, message }) => {
       const receiverSocketId = userSocketMap[receiverId];
-  
       console.log('receiver Id', receiverId);
   
       if (receiverSocketId) {
-        io.to(receiverSocketId).emit('receiveMessage', {
+        io.to(receiverSocketId).emit('newMessage', {
           senderId,
           message,
+          timeStamp: new Date().toISOString(),
         });
+      } else {
+        console.log('Receiver socket ID not found for', receiverId);
       }
     });
   });
-  
-
   
   http.listen(3000, () => {
     console.log('Socket.IO running on port 3000');
   });
   
-
-
-
-
-
   app.post('/sendMessage', async (req, res) => {
     try {
-      const {senderId, receiverId, message} = req.body;
+      const { senderId, receiverId, message } = req.body;
   
       const newMessage = new Message({
         senderId,
@@ -259,7 +256,7 @@ app.get('/user/:userId', async (req, res) => {
       const receiverSocketId = userSocketMap[receiverId];
   
       if (receiverSocketId) {
-        console.log('emitting recieveMessage event to the reciver', receiverId);
+        console.log('emitting newMessage event to the receiver', receiverId);
         io.to(receiverSocketId).emit('newMessage', newMessage);
       } else {
         console.log('Receiver socket ID not found');
@@ -268,28 +265,24 @@ app.get('/user/:userId', async (req, res) => {
       res.status(201).json(newMessage);
     } catch (error) {
       console.log('ERROR', error);
+      res.status(500).json({ error: 'Internal server error' });
     }
   });
   
-
-
-
-
-
-
   app.get('/messages', async (req, res) => {
     try {
-      const {senderId, receiverId} = req.query;
+      const { senderId, receiverId } = req.query;
   
       const messages = await Message.find({
         $or: [
-          {senderId: senderId, receiverId: receiverId},
-          {senderId: receiverId, receiverId: senderId},
+          { senderId: senderId, receiverId: receiverId },
+          { senderId: receiverId, receiverId: senderId },
         ],
       }).populate('senderId', '_id name');
   
       res.status(200).json(messages);
     } catch (error) {
       console.log('Error', error);
+      res.status(500).json({ error: 'Internal server error' });
     }
   });

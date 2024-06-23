@@ -96,6 +96,7 @@ const ChatsScreen = () => {
 
       if (response.status === 200) {
         await getRequests();
+        await getUser();
       }
     } catch (error) {
       console.log('Error accepting request', error);
@@ -122,6 +123,7 @@ const ChatsScreen = () => {
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'space-between',
+          backgroundColor:"#ffdddc"
         }}
       >
         <Pressable onPress={logout}>
@@ -133,7 +135,7 @@ const ChatsScreen = () => {
           />
         </Pressable>
 
-        <Text style={{ fontSize: 15, fontWeight: '500' }}>Chats</Text>
+        <Text style={{ fontSize: 15, fontWeight: '500',color:"black" }}>Chats</Text>
 
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
           <AntDesign name="camerao" size={26} color="black" />
@@ -156,7 +158,7 @@ const ChatsScreen = () => {
           }}
         >
           <View>
-            <Text>Chats</Text>
+            <Text style={{color:"black"}}>Chats</Text>
           </View>
           <Entypo name="chevron-small-down" size={26} color="black" />
         </Pressable>
@@ -193,10 +195,11 @@ const ChatsScreen = () => {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
+            backgroundColor:"#e1ffe1"
           }}
         >
           <View>
-            <Text>Requests</Text>
+            <Text style={{color:"black"}}>Requests</Text>
           </View>
           <Entypo name="chevron-small-down" size={26} color="black" />
         </Pressable>

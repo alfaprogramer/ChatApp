@@ -33,7 +33,10 @@ const PeopleScreen = () => {
       }
 
       const data = await response.json();
-      setUsers(data);
+
+      // Filter out the logged-in user
+      const filteredData = data.filter(user => user._id !== userId);
+      setUsers(filteredData);
     } catch (error) {
       console.log('Fetch users error:', error);
     }

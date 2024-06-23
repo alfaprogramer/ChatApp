@@ -7,6 +7,7 @@ import {
   TextInput,
   View,
   KeyboardAvoidingView,
+  Image
 } from 'react-native';
 import { AuthContext } from '../AuthContext';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -34,8 +35,14 @@ const ChatRoom = () => {
             name="arrow-back"
             size={24}
             color="black"
-            onPress={() => navigation.navigate('ChatRoom')}
+            onPress={() => navigation.goBack()} // Use goBack instead of navigate
           />
+           {route?.params?.image && (
+          <Image
+            source={{ uri: route.params.image }}
+            style={{ width: 40, height: 40, borderRadius: 20 }}
+          />
+        )}
           <View>
             <Text>{route?.params?.name}</Text>
           </View>
@@ -128,7 +135,7 @@ const ChatRoom = () => {
                   }
                 : {
                     alignSelf: 'flex-start',
-                    backgroundColor: 'white',
+                    backgroundColor: 'pink',
                     padding: 8,
                     margin: 10,
                     borderRadius: 7,
@@ -136,8 +143,8 @@ const ChatRoom = () => {
                   },
             ]}
           >
-            <Text style={{ fontSize: 13, textAlign: 'left' }}>{item?.message}</Text>
-            <Text style={{ textAlign: 'right', fontSize: 9, color: 'gray', marginTop: 4 }}>
+            <Text style={{ fontSize: 13, textAlign: 'left' , color:"black", fontSize:14}}>{item?.message}</Text>
+            <Text style={{ textAlign: 'right', fontSize: 9, color: 'black', marginTop: 4 }}>
               {formatTime(item?.timeStamp)}
             </Text>
           </Pressable>

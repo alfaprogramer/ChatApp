@@ -80,14 +80,14 @@ app.listen(port, () => {
 
 
 app.get("/users/:userId", async (req, res) => {
-    try {
-        const userId = req.params.userId;
+  try {
+    const userId = req.params.userId;
         const users = await User.find({ _id: { $ne: userId } });
         res.json(users);
 
     } catch (error) {
         console.log("Error", error);
-    }
+  }
 });
 
 

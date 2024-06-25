@@ -82,13 +82,23 @@ app.listen(port, () => {
 app.get("/users/:userId", async (req, res) => {
   try {
     const userId = req.params.userId;
-        const users = await User.find({ _id: { $ne: userId } });
-        res.json(users);
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ error: "Invalid userId" });
+    }
 
-    } catch (error) {
-        console.log("Error", error);
+    const users = await User.find({ _id: { $ne: userId } }).select('_id name email image requests');
+    if (!users) {
+      return res.status(404).json({ error: "No users found" });
+    }
+
+    res.json(users);
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).json({ error: "Internal server error", details: error.message });
   }
 });
+
+
 
 
 
